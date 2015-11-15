@@ -21,6 +21,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,8 +59,8 @@ public class ProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Student student;
-    private Button button;
-    private Button infoButton;
+    private LinearLayout button;
+    private LinearLayout infoButton;
     private ImageView imageView;
     private View rootView;
     private TextView gpaText;
@@ -113,10 +114,10 @@ public class ProfileFragment extends Fragment {
         name.setText(student.getName());
         TextView id = (TextView)rootView.findViewById(R.id.idText);
         id.setText(Integer.toString(student.getStudentId()));
-        button = (Button)rootView.findViewById(R.id.courseButton);
-        infoButton = (Button)rootView.findViewById(R.id.infoButton);
+        button = (LinearLayout)rootView.findViewById(R.id.courseButton);
+        infoButton = (LinearLayout)rootView.findViewById(R.id.infoButton);
         gpaText = (TextView)rootView.findViewById(R.id.GPAtext);
-        
+
         setColor();
 
         button.setOnClickListener(new View.OnClickListener() {

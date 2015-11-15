@@ -6,7 +6,7 @@
     <string name="profile">Profile</string>
     <string name="calendar">Calendar</string>
     <string name="QandA">Q/A</string>
-    <string name="setting">Settings</string>
+    <string name="setting">Logout</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

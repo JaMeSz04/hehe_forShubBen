@@ -80,7 +80,9 @@ public class MainActivity extends ActionBarActivity
                 fragment = new QandAFragment();
                 break;
             case 4:
+                student = null;
                 fragment = new SettingFragment();
+
                 break;
 
 
