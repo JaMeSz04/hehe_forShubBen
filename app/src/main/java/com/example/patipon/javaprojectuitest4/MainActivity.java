@@ -2,12 +2,15 @@ package com.example.patipon.javaprojectuitest4;
 
 
 import android.app.FragmentTransaction;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,7 +24,7 @@ import model.Student;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerCallbacks,infoFragment.OnFragmentInteractionListener,SpacificCourseFragment.OnFragmentInteractionListener,CourseFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener,NotificationFragment.OnFragmentInteractionListener,CalendarFragment.OnFragmentInteractionListener,QandAFragment.OnFragmentInteractionListener,SettingFragment.OnFragmentInteractionListener{
+        implements NavigationDrawerCallbacks,infoFragment.OnFragmentInteractionListener,SpacificCourseFragment.OnFragmentInteractionListener,CourseFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener,NotificationFragment.OnFragmentInteractionListener,CalendarFragment.OnFragmentInteractionListener,QandAFragment.OnFragmentInteractionListener,SettingFragment.OnFragmentInteractionListener {
 
 
     /**
@@ -31,6 +34,8 @@ public class MainActivity extends ActionBarActivity
     private Toolbar mToolbar;
     private Student student;
     private Course currentCourse;
+    private NotificationCompat.Builder mbuilder;
+    private NotificationManager notificationManager;
 
 
     @Override
@@ -39,6 +44,10 @@ public class MainActivity extends ActionBarActivity
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
 
+        mbuilder = new NotificationCompat.Builder(this);
+
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notifyUser("ShubU", "He has finished his job");
         setContentView(R.layout.activity_main);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
@@ -57,7 +66,7 @@ public class MainActivity extends ActionBarActivity
         Toast.makeText(this, "Menu item selected -> " + position, Toast.LENGTH_SHORT).show();
         Fragment fragment = null;
         FragmentManager fragmentManager = getSupportFragmentManager();
-        switch (position){
+        switch (position) {
             case 0:
                 fragment = new NotificationFragment();
                 break;
@@ -76,8 +85,24 @@ public class MainActivity extends ActionBarActivity
 
 
         }
-        fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
 
+    }
+
+
+    private void setNotification(String title, String body) {
+        mbuilder.setContentTitle(title);
+        mbuilder.setContentText(body);
+    }
+
+
+    public void notifyUser()
+    {
+        notificationManager.notify(0, mbuilder.build());
+    }
+    public void notifyUser(String title,String body){
+        setNotification(title,body);
+        notificationManager.notify(0, mbuilder.build());
     }
 
     public void setmToolbarColor(int color)

@@ -116,6 +116,7 @@ public class ProfileFragment extends Fragment {
         button = (Button)rootView.findViewById(R.id.courseButton);
         infoButton = (Button)rootView.findViewById(R.id.infoButton);
         gpaText = (TextView)rootView.findViewById(R.id.GPAtext);
+        
         setColor();
 
         button.setOnClickListener(new View.OnClickListener() {
