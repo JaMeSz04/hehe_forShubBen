@@ -1,6 +1,7 @@
 package com.example.patipon.javaprojectuitest4;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -60,6 +61,7 @@ public class QandAFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        ((MainActivity)getActivity()).setmToolbarColor(Color.rgb(18, 86, 136));
     }
 
     @Override

@@ -61,7 +61,7 @@ public class Student extends Person {
         double sum = 0;
          for (Map.Entry<Course, Double> entry : courseList.entrySet())  {
             try {
-                sum += entry.getValue();
+                sum += entry.getKey().getActualGradeTarmGrain(this);
             } catch (IllegalArgumentException e) {
                 return -1;
             }

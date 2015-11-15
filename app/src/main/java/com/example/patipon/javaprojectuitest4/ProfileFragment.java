@@ -3,6 +3,7 @@ package com.example.patipon.javaprojectuitest4;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +59,10 @@ public class ProfileFragment extends Fragment {
     private String mParam2;
     private Student student;
     private Button button;
+    private Button infoButton;
+    private ImageView imageView;
+    private View rootView;
+    private TextView gpaText;
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -101,13 +107,17 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+        imageView = (ImageView)rootView.findViewById(R.id.bgHead);
         TextView name = (TextView)rootView.findViewById(R.id.NameText);
         name.setText(student.getName());
         TextView id = (TextView)rootView.findViewById(R.id.idText);
         id.setText(Integer.toString(student.getStudentId()));
         button = (Button)rootView.findViewById(R.id.courseButton);
+        infoButton = (Button)rootView.findViewById(R.id.infoButton);
+        gpaText = (TextView)rootView.findViewById(R.id.GPAtext);
+        setColor();
+
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -115,14 +125,58 @@ public class ProfileFragment extends Fragment {
                 Fragment fragment = null;
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragment = new CourseFragment();
+                ((MainActivity)getActivity()).setmToolbarColor(Color.rgb(18,86,136));
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, fragment)
                         .commit();
             }
         });
+        infoButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Fragment fragment;
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragment = new infoFragment();
+                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+                ((MainActivity)getActivity()).setmToolbarColor(Color.rgb(18,86,136));
+            }
+        });
         return rootView;
     }
 
+    private void setColor()
+    {
+        double grade = 2.6;
+        System.out.println(grade);
+        gpaText.setText(Double.toString(grade));
+        if (grade >= 3.00)
+        {
+            imageView.setBackgroundColor(Color.rgb(0, 230, 118));
+
+            ((MainActivity)getActivity()).setmToolbarColor(Color.rgb(0, 230, 118));
+
+        }
+        else if(grade >= 2.5)
+        {
+            imageView.setBackgroundColor(Color.rgb(253, 216, 53));
+            ((MainActivity)getActivity()).setmToolbarColor(Color.rgb(253, 216, 53));
+
+        }
+        else if (grade >= 2.0)
+        {
+            imageView.setBackgroundColor(0xEF6C00);
+            ((MainActivity)getActivity()).setmToolbarColor(0xEF6C00);
+
+        }
+        else
+        {
+            imageView.setBackgroundColor(0xFF5722);
+            ((MainActivity)getActivity()).setmToolbarColor(0xFF5722);
+
+        }
+        gpaText.setTextColor(Color.WHITE);
+    }
 
     @Override
     public void onViewCreated(View view,Bundle savedInstanceState)

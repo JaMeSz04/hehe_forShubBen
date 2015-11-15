@@ -21,7 +21,7 @@ import model.Student;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerCallbacks,SpacificCourseFragment.OnFragmentInteractionListener,CourseFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener,NotificationFragment.OnFragmentInteractionListener,CalendarFragment.OnFragmentInteractionListener,QandAFragment.OnFragmentInteractionListener,SettingFragment.OnFragmentInteractionListener{
+        implements NavigationDrawerCallbacks,infoFragment.OnFragmentInteractionListener,SpacificCourseFragment.OnFragmentInteractionListener,CourseFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener,NotificationFragment.OnFragmentInteractionListener,CalendarFragment.OnFragmentInteractionListener,QandAFragment.OnFragmentInteractionListener,SettingFragment.OnFragmentInteractionListener{
 
 
     /**
@@ -79,6 +79,12 @@ public class MainActivity extends ActionBarActivity
         fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
 
     }
+
+    public void setmToolbarColor(int color)
+    {
+        mToolbar.setBackgroundColor(color);
+    }
+
 
     private void loadStudent()
     {
