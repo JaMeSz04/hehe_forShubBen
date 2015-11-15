@@ -18,13 +18,13 @@ import model.Student;
 public class ExpandListAdapter extends BaseExpandableListAdapter{
 
     private Context context;
-    private ArrayList<Course> courses;
-    private Student student;
+    private ArrayList<Notification> courses;
 
-    public ExpandListAdapter(Context context,ArrayList<Course> courses, Student student) {
-        this.context = context;
+
+    public ExpandListAdapter(Context context,ArrayList<Notification> courses) {
+            this.context = context;
         this.courses = courses;
-        this.student = student;
+
     }
 
     @Override
@@ -38,13 +38,13 @@ public class ExpandListAdapter extends BaseExpandableListAdapter{
     }
 
     @Override
-    public Course getGroup(int groupPosition) {
+    public Notification getGroup(int groupPosition) {
         return courses.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return courses.get(groupPosition).getStudentGrade(student);
+        return courses.get(groupPosition);
     }
 
     @Override
@@ -64,29 +64,25 @@ public class ExpandListAdapter extends BaseExpandableListAdapter{
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String headerTitle =  getGroup(groupPosition).toString();
-        String subHeaderTitle = getGroup(groupPosition).getProfessorName();
+        String headerTitle =  getGroup(groupPosition).getHeader();
+
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_group_expand, null);
         }
-
-
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.header_text);
-        TextView subHeader = (TextView) convertView.findViewById(R.id.sub_header_text);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
-        subHeader.setTypeface(null, Typeface.NORMAL);
-        subHeader.setText(subHeaderTitle);
+
 
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String childText = "Total Score : " + getChild(groupPosition, childPosition).toString();
+        final String childText = ((Notification)getChild(groupPosition, childPosition)).getContext();
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context

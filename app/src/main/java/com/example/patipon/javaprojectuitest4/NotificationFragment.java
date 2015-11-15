@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -22,7 +25,9 @@ public class NotificationFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    ExpandableListView expandableListView;
+    ExpandListAdapter listAdapter;
+    ArrayList<Notification> listdata;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -64,9 +69,20 @@ public class NotificationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_notification, container, false);
+        expandableListView = (ExpandableListView)rootView.findViewById(R.id.expandable_list_view);
+        prepareListData();
+        listAdapter = new ExpandListAdapter(getContext(),listdata);
+        expandableListView.setAdapter(listAdapter);
+        return rootView ;
     }
 
+    private void prepareListData()
+    {
+        listdata = new ArrayList<Notification>();
+        listdata.add(new Notification("Mathematics 3", "ShubU the great got full score on the last midterm examination"));
+        listdata.add(new Notification("DataStructure and Algorithm", "Brian the noob just fail an exam with -8888 score"));
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

@@ -102,6 +102,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+
         TextView name = (TextView)rootView.findViewById(R.id.NameText);
         name.setText(student.getName());
         TextView id = (TextView)rootView.findViewById(R.id.idText);
